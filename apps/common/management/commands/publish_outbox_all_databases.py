@@ -16,7 +16,7 @@ class Command(BaseCommand):
         parser.add_argument("--limit", type=int, default=settings.OUTBOX_PUBLISH_BATCH_SIZE)
         parser.add_argument(
             "--aggregate-type",
-            default=settings.OUTBOX_NOTIFICATION_AGGREGATE_TYPE,
+            default="notification",
         )
         parser.add_argument("--max-retries", type=int, default=settings.OUTBOX_MAX_RETRIES)
         parser.add_argument(
