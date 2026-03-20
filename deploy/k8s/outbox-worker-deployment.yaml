@@ -15,7 +15,7 @@ spec:
       labels:
         app: outbox-worker
     spec:
-      serviceAccountName: stagelog-backend-sa
+      serviceAccountName: stagelog-outbox-worker-sa
       containers:
       - name: outbox-worker
         image: 430118823715.dkr.ecr.ap-northeast-2.amazonaws.com/stagelog-outbox-worker:latest
