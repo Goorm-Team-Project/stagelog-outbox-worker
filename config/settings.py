@@ -34,16 +34,19 @@ else:
     if db_use_ssl:
         mysql_options["ssl"] = {"ca": db_ssl_ca}
 
+    posts_db_config = {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": os.environ["DB_NAME_POSTS"],
+        "USER": os.environ["DB_USER_POSTS"],
+        "PASSWORD": os.environ["DB_PASSWORD_POSTS"],
+        "HOST": os.environ["DB_HOST"],
+        "PORT": "3306",
+        "OPTIONS": mysql_options.copy(),
+    }
+
     DATABASES = {
-        "posts_db": {
-            "ENGINE": "django.db.backends.mysql",
-            "NAME": os.environ["DB_NAME_POSTS"],
-            "USER": os.environ["DB_USER_POSTS"],
-            "PASSWORD": os.environ["DB_PASSWORD_POSTS"],
-            "HOST": os.environ["DB_HOST"],
-            "PORT": "3306",
-            "OPTIONS": mysql_options.copy(),
-        },
+        "default": posts_db_config.copy(),
+        "posts_db": posts_db_config,
         "auth_db": {
             "ENGINE": "django.db.backends.mysql",
             "NAME": os.environ["DB_NAME_AUTH"],
