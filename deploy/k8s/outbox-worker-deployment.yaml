@@ -20,14 +20,12 @@ spec:
       - name: outbox-worker
         image: 430118823715.dkr.ecr.ap-northeast-2.amazonaws.com/stagelog-outbox-worker:latest
         imagePullPolicy: Always
+        envFrom:
+        - secretRef:
+            name: stagelog-outbox-worker-env
         env:
         - name: DJANGO_SETTINGS_MODULE
           value: config.settings
-        volumeMounts:
-        - name: env-file
-          mountPath: /app/.env
-          subPath: .env
-          readOnly: true
         resources:
           requests:
             cpu: 100m
@@ -35,10 +33,3 @@ spec:
           limits:
             cpu: 300m
             memory: 384Mi
-      volumes:
-      - name: env-file
-        secret:
-          secretName: stagelog-outbox-worker-env
-          items:
-          - key: .env
-            path: .env
